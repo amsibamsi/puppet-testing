@@ -1,15 +1,13 @@
-class c { 
+class a { 
   if defined("b") {
-    notice("is defined")
+    notice("b is defined")
+  }
+  if defined("c") {
+    notice("c is defined")
   }
 }
 
-include a
+class b {}
+class c {}
 
-class a { 
-  include b
-  include c
-}
-
-class b { 
-}
+include a,b
