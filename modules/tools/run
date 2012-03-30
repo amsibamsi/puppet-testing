@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd `dirname $0`/../manifests
+puppet apply $* --modulepath=$PWD/../modules site.pp
