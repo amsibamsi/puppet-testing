@@ -1,0 +1,11 @@
+#!/bin/bash
+
+start() {
+  echo "start"
+  sleep 10
+}
+
+echo "this: $$"
+start &
+echo "background: $!"
+

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+sigint() { echo 'int'; }
+sigterm() { echo 'term'; }
+sigexit() { echo 'exit'; }
+
+trap sigint INT
+trap 'echo "term"; exit 0' TERM
+trap sigexit EXIT
+
+while read line; do
+  [ $line = 'e' ] && exit 0
+  [ $line = 'b' ] && break
+done

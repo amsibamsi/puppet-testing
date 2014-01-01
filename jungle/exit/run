@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+touch file
+trap 'rm file' EXIT
+
+sleep 10

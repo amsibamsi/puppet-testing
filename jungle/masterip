@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function readlines() {
+  MASTERIP=""
+  while read LINE; do
+    MASTERIP="${MASTERIP} `echo ${LINE} | /usr/bin/cut -d' ' -f2`"
+  done
+  echo "${MASTERIP}"
+}
+
+MASTERIPS=`/bin/cat /etc/resolv.conf | grep nameserver | readlines`
+echo "MASTERIPS: ${MASTERIPS}"

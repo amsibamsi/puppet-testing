@@ -1,0 +1,17 @@
+#!/bin/bash
+
+error() {
+  echo "error in $1" >&2
+  exit 1
+}
+
+dede() {
+  dd if=/dev/zero bs=1k countt=10 || error dd
+}
+
+gezip() {
+  [ "$?" = 0 ] || error 'gzip (due to previous error)'
+  gzip - > dd-test.gz || error gzip
+}
+
+dede | gezip

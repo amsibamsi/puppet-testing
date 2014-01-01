@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+timeout=$1
+sleep $timeout &
+while jobs 1; do
+  echo "waiting for job ..."
+  sleep 1
+  let --timeout
+done
