@@ -4,6 +4,9 @@
 (def default-iterations
   "1000000")
 
+(def default-repetitions
+  "5")
+
 (defn loop-fn
   [iterations]
   (loop [i iterations]
@@ -29,22 +32,25 @@
     n))
 
 (defn perf
-  [iterations]
+  [iterations repetitions]
   (do
     (println "clojure")
     (println "loop fn...")
-    (time (loop-fn iterations))
+    (dotimes [_ repetitions] (time (loop-fn iterations)))
     (println "loop defn...")
-    (time (loop-defn iterations))
+    (dotimes [_ repetitions] (time (loop-defn iterations)))
     (println "loop defn typed...")
-    (time (loop-defn-typed iterations))
+    (dotimes [_ repetitions] (time (loop-defn-typed iterations)))
     (println "loop timesdo...")
-    (time (loop-timesdo iterations))))
+    (dotimes [_ repetitions] (time (loop-timesdo iterations)))))
 
 (defn -main
   ([] (-main default-iterations))
-  ([iterations]
-   (let [i (read-string iterations)]
+  ([iterations] (-main iterations default-repetitions))
+  ([iterations repetitions]
+   (let [i (read-string iterations)
+         r (read-string repetitions)]
      (println i "iterations")
-     (perf i)
-     (cljperf.Perf/perf i))))
+     (println r "repetitions")
+     (perf i r)
+     (cljperf.Perf/perf i r))))
