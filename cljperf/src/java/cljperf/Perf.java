@@ -2,15 +2,14 @@ package cljperf;
 
 public class Perf {
 
-  public static final double a = 432244.53223899;
-  public static final double b = 9823048.5729233;
-  public static double c = 0.0;
-
-  public static void perf() {
+  public static void perf(long iterations) {
     System.out.println("java performance");
+    System.out.println("for loop...");
     long before = System.nanoTime();
-    for (long i=0; i<1000000000L; i++) {
-      c = c + 1.0;
+    long x = 0;
+    for (long i=0; i<iterations; i++) {
+      // need to do something so loop is not removed for optimization?
+      x = x + 1;
     }
     double elapsed = ((double)(System.nanoTime() - before)) / 1000000.0;
     System.out.println("\"Elapsed time: " + elapsed + " msecs\"");
