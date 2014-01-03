@@ -6,4 +6,6 @@
   :dependencies [[org.clojure/clojure "1.5.1"]]
   :java-source-paths ["src/java"]
   :main cljperf.core
-  :aot :all)
+  :aot :all
+  ; disable leiningen jvm opts, much faster for repl
+  :jvm-opts ^:replace [])
