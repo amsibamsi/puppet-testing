@@ -37,13 +37,13 @@
 (defn perf-loop
   [iterations repetitions]
   (do
-    (println "loop fn...")
+    (println "loop fn ...")
     (dotimes [_ repetitions] (time (loop-fn iterations)))
-    (println "loop defn...")
+    (println "loop defn ...")
     (dotimes [_ repetitions] (time (loop-defn iterations)))
-    (println "loop defn typed...")
+    (println "loop defn typed ...")
     (dotimes [_ repetitions] (time (loop-defn-typed iterations)))
-    (println "loop timesdo...")
+    (println "loop timesdo ...")
     (dotimes [_ repetitions] (time (loop-timesdo iterations)))))
 
 (defn perf-array
@@ -55,12 +55,26 @@
           (let [a (int-array size 0)]
             (dotimes [i size] (aset a i i)))))))
 
+(defn perf-sum
+  [iterations repetitions]
+  (do
+    (println "sum ...")
+    (dotimes [_ repetitions] (time (dotimes [i iterations] (+ i i))))))
+
+(defn perf-mult
+  [iterations repetitions]
+  (do
+    (println "multiplication ...")
+    (dotimes [_ repetitions] (time (dotimes [i iterations] (* i i))))))
+
 (defn perf
   [iterations size repetitions]
   (do
     (println "clojure performance ...")
     (perf-loop iterations repetitions)
-    (perf-array size repetitions)))
+    (perf-array size repetitions)
+    (perf-sum iterations repetitions)
+    (perf-mult iterations repetitions)))
 
 (defn -main
   ([] (-main default-iterations))

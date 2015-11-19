@@ -6,10 +6,12 @@ public class Perf {
     System.out.println("java performance ...");
     Perf.perf_loop(iterations, repetitions);
     Perf.perf_array(size, repetitions);
+    Perf.perf_sum(iterations, repetitions);
+    Perf.perf_mult(iterations, repetitions);
   }
 
   public static void perf_loop(long iterations, long repetitions) {
-    System.out.println("for loop...");
+    System.out.println("for loop ...");
     for (long i=0; i<repetitions; i++) {
       long before = System.nanoTime();
       long x = 0;
@@ -29,6 +31,30 @@ public class Perf {
       long[] a = new long[(int)size];
       for (int j=0; j<(int)size; j++) {
         a[j] = j;
+      }
+      double elapsed = ((double)(System.nanoTime() - before)) / 1000000.0;
+      System.out.println("\"Elapsed time: " + elapsed + " msecs\"");
+    }
+  }
+
+  public static void perf_sum(long iterations, long repetitions) {
+    System.out.println("sum ...");
+    for (long i=0; i<repetitions; i++) {
+      long before = System.nanoTime();
+      for (long j=0; j<iterations; j++) {
+        long x = j + j;
+      }
+      double elapsed = ((double)(System.nanoTime() - before)) / 1000000.0;
+      System.out.println("\"Elapsed time: " + elapsed + " msecs\"");
+    }
+  }
+
+  public static void perf_mult(long iterations, long repetitions) {
+    System.out.println("multiplication ...");
+    for (long i=0; i<repetitions; i++) {
+      long before = System.nanoTime();
+      for (long j=0; j<iterations; j++) {
+        long x = j * j;
       }
       double elapsed = ((double)(System.nanoTime() - before)) / 1000000.0;
       System.out.println("\"Elapsed time: " + elapsed + " msecs\"");
